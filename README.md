@@ -14,14 +14,12 @@ Compilation
 We use maven to handle our dependencies.
 
 * Install [Maven 3](http://maven.apache.org/download.html)
-* Check out and install [Bukkit](http://github.com/Bukkit/Bukkit)
-    * *Note*: this is not needed as the repository we use has Bukkit too, but you might have a newer one (with your own changes :D)
 * Check out this repo and: `mvn clean package`
 
 Coding and Pull Request Conventions
 -----------
 
-* We generally follow the Sun/Oracle coding standards.
+* We generally follow the Java coding standards.
 * No Spaces; use Tabs instead.
 * No trailing whitespaces.
 * No CRLF line endings, LF only, put your gits 'core.autocrlf' on 'true'.
