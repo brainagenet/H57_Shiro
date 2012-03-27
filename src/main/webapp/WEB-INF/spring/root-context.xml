@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/tx 
+   	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- enable autowire -->
+	<context:annotation-config />
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Enable transaction demarcation with annotations -->
+	<tx:annotation-driven />
+	
+	<!-- Enable component scanning and autowire (beware that this does not enable 
+		MyBatis mapper scanning!) -->
+	<context:component-scan base-package="com.h57.sample.service, com.h57.sample.util" />
+	
+	<!--  We Use This for Bean Validation -->
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+		
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<!--  Sample Beans -->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.h57.sample.persistence" />
+	</bean>
+
+	<!-- Security Configuration / Apache Shiro -->
+	<import resource="shiro-context.xml"/>
+
+
+	<!-- Database Configuration / MyBatis -->
+	<!-- define the SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.h57.sample.domain" />
+		<property name="configLocation"
+			value="classpath:com/h57/sample/persistence/mybatis-config.xml" />
+	</bean>	
+	
+	<!--  Get the Datasource -->
+		<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			<property name="url" value="jdbc:mysql://localhost/h57_shiro" />
+			<property name="username" value="h57_shiro" />
+			<property name="password" value="h57_shiro" />
+		</bean>
+</beans>
