@@ -6,6 +6,7 @@ A Spring MVC 3.1.0 sample, leveraging Shiro 1.20, myBatis 3.0.6, and JSR-303 Val
 When playing around with these technologies, I found it challenging to find a solid sample implementation that I could wrap my head around. So I decided to to write one myself and then use it to write some tutorials.
 
 Website: [Google +] (https://plus.google.com/u/0/113383164169998763938/about)
+
 Bugs/Suggestions: [Google +] (https://plus.google.com/u/0/113383164169998763938/about) (till I have need of something more mature)
 
 Compilation
@@ -45,7 +46,7 @@ Coding and Pull Request Conventions
 
 If you make changes or add classes it is mandatory to:
 
-* Get the files from the [this repo](https://github.com/Bubba) - make sure you have the last version!
+* Get the files from the [this repo](https://github.com/bubba-h57/H57_Shiro) - make sure you have the last version!
 * Make a separate commit adding the new classes (commit message: "Added x for diff visibility" or so).
 * Then make further commits with your changes.
 * Mark your changes with:
