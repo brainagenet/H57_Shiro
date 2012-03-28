@@ -10,7 +10,7 @@ CREATE TABLE shiro_sequence (seq_name VARCHAR(50) NOT NULL, seq_count NUMERIC(38
 INSERT INTO shiro_sequence (seq_name, seq_count) VALUES ('shiro_user_seq', 0);
 INSERT INTO shiro_sequence (seq_name, seq_count) VALUES ('shiro_role_seq', 0);
 --// Create a TestUser with a password of TestUserPassword
-INSERT INTO shiro_user (userid, passphrase, salt, email, date_created) VALUES ('TestUser', 'Lcn0thHnIIs/S3Sco7xfRl/thEG12Dx5sDc6l+QG6tpIOc6hc/ciYU2A0gf9qdVNhHUCPJSBqbLixgYP8OIPxw==', '5bf+DE8ivc0/H3/T6al8pg==', 'TestUser@test.com', CURDATE()); 
+INSERT INTO shiro_user (userid, passphrase, salt, email, date_created) VALUES ('TestUser', 'M1IFzumVt5cZznXtuE7uBS5xFE62vpcQY939F12ZTGQuJS9/vrnGKOiTu+cJGDEZO1XfJQYATVLO7qQTDuiCfA==M1IFzumVt5cZznXtuE7uBS5xFE62vpcQY939F12ZTGQuJS9/vrnGKOiTu+cJGDEZO1XfJQYATVLO7qQTDuiCfA==', 'Cv2YXgmaudkMcw0/10T0jw==', 'TestUser@test.com', CURDATE()); 
 INSERT INTO shiro_role (description, name) VALUES ('Test Role', 'Test');
 INSERT INTO shiro_role_permission (role_id, permission) VALUES ( (SELECT id FROM shiro_role where name = 'Test' ), 'read');
 INSERT INTO shiro_user_role (user_id, role_id) VALUES ((SELECT id FROM shiro_user where userid = 'TestUser' ), (SELECT id FROM shiro_role where name = 'Test' ));
