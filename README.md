@@ -35,7 +35,7 @@ Coding and Pull Request Conventions
 -----------
 
 * We generally follow the Java coding standards.
-* No Spaces; use Tabs instead.
+* No Tabs; use 2 Spaces instead.
 * No trailing whitespaces.
 * No CRLF line endings, LF only, put your gits 'core.autocrlf' on 'true'.
 * No 80 column limit or 'weird' midstatement newlines.
