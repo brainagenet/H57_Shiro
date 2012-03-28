@@ -122,24 +122,29 @@ public class HomeController {
 	@RequestMapping(value = "/smoketest", method = RequestMethod.GET)
 	public String smoketest(Locale locale, Model model,
 			HttpServletRequest request) {
+		String salted = this.identityService.getApplicationSalt();
+		logger.info("SALT = " + salted);
 		String userid = "TestUser";
 		String passphrase = "TestUserPassword";
 		UsernamePasswordToken token = new UsernamePasswordToken(userid,
-				passphrase);
+			passphrase);
 		Subject currentUser = SecurityUtils.getSubject();
 
 		try {
-			currentUser.login(token);
-			logger.info("AUTH SUCCESS");
+		    currentUser.login(token);
+		    logger.info("AUTH SUCCESS");
 		} catch (AuthenticationException ae) {
-			logger.info("AUTH MSSG: " + ae.getMessage());
+		    logger.info("AUTH MSSG: " + ae.getMessage());
 		}
 
 		Identity thisIdentity = null;
 		if (currentUser.isAuthenticated()) {
-			logger.info("PRINCIPAL: " + currentUser.getPrincipal());
-			thisIdentity = identityService.getIdentity(currentUser
-					.getPrincipal().toString());
+		    logger.info("PRINCIPAL: " + currentUser.getPrincipal());
+		    thisIdentity = identityService.getIdentity(currentUser
+			    .getPrincipal().toString());
+		    salted = this.identityService.getCombinedSalt(thisIdentity
+			    .getSalt());
+		    logger.info("COMBINED SALT = " + salted);
 		}
 		model.addAttribute("identity", thisIdentity);
 		return "smoketest/smoke";

@@ -14,12 +14,13 @@
  */
 package com.h57.sample.service;
 
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.h57.sample.domain.Identity;
@@ -29,62 +30,83 @@ import com.h57.sample.persistence.IdentityMapper;
 /**
  * myBatis Identity Service for our Identity Domain object
  * 
- * @author Bubba Hines <bubba@hines57.com>
+ * @author Bubba Hines (bubba@hines57.com)
  * @since 0.02
  */
 @Service
+@PropertySource("classpath:application.properties")
 public class IdentityService {
 
-	@Autowired(required = true)
-	private IdentityMapper identityMapper;
+    @Autowired
+    private Environment env;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(IdentityService.class);
+    public void setEnv(Environment env) {
+	this.env = env;
+    }
 
-	@Autowired(required = true)
-	private HashedCredentialsMatcher sha512Matcher;
+    @Autowired(required = true)
+    private IdentityMapper identityMapper;
 
-	public Identity registerIdentity(RegistrationForm registration) {
+    private static final Logger logger = LoggerFactory
+	    .getLogger(IdentityService.class);
 
-		registration.setSalt(getSalt());
-		registration.setPassphrase(encodePassphrase(
-				registration.getPassphrase(), registration.getSalt()));
+    public IdentityMapper getIdentityMapper() {
+	return identityMapper;
+    }
 
-		// Insert the Identity
-		identityMapper.registerIdentity(registration);
+    public Identity registerIdentity(RegistrationForm registration) {
 
-		logger.trace("INSERTED ID = (" + registration.getId() + ")");
-		// Get a new Identity object, fully populated from the DB
-		return this.getIdentity(registration.getId());
+	registration.setSalt(getSalt());
+	registration.setPassphrase(encodePassphrase(
+		registration.getPassphrase(), registration.getSalt()));
 
+	// Insert the Identity
+	identityMapper.registerIdentity(registration);
+
+	logger.trace("INSERTED ID = (" + registration.getId() + ")");
+	// Get a new Identity object, fully populated from the DB
+	return this.getIdentity(registration.getId());
+
+    }
+
+    public static String getSalt() {
+	return new SecureRandomNumberGenerator().nextBytes().toBase64();
+    }
+
+    public String getApplicationSalt() {
+	return env.getProperty("shiro.applicationSalt");
+    }
+
+    public String getCombinedSalt(String salt) {
+	return env.getProperty("shiro.applicationSalt") + ":" + salt;
+    }
+
+    public String encodePassphrase(String rawPassphrase, String salt) {
+	return new Sha512Hash(rawPassphrase, getCombinedSalt(salt),
+		getIterations()).toBase64();
+    }
+
+    public Integer getIterations() {
+	return Integer.parseInt(env.getProperty("shiro.hashIterations"));
+    }
+
+    public Identity getIdentity(int id) {
+	logger.trace("Entering getIdentity(" + id + ")");
+	if (identityMapper == null) {
+	    logger.debug("identityMapper didn't get autowired!");
 	}
+	return identityMapper.getIdentityById(id);
+    }
 
-	public static String getSalt() {
-		return new SecureRandomNumberGenerator().nextBytes().toBase64();
+    public Identity getIdentity(String userId) {
+	logger.trace("Entering getIdentity(" + userId + ")");
+	if (identityMapper == null) {
+	    logger.debug("identityMapper didn't get autowired!");
 	}
+	return identityMapper.getIdentityByUserId(userId);
+    }
 
-	public String encodePassphrase(String rawPassphrase, String salt) {
-		return new Sha512Hash(rawPassphrase, salt,
-				sha512Matcher.getHashIterations()).toBase64();
-	}
-
-	public Identity getIdentity(int id) {
-		logger.trace("Entering getIdentity(" + id + ")");
-		if (identityMapper == null) {
-			logger.debug("identityMapper didn't get autowired!");
-		}
-		return identityMapper.getIdentityById(id);
-	}
-
-	public Identity getIdentity(String userId) {
-		logger.trace("Entering getIdentity(" + userId + ")");
-		if (identityMapper == null) {
-			logger.debug("identityMapper didn't get autowired!");
-		}
-		return identityMapper.getIdentityByUserId(userId);
-	}
-
-	public void setIdentityMapper(IdentityMapper identityMapper) {
-		this.identityMapper = identityMapper;
-	}
+    public void setIdentityMapper(IdentityMapper identityMapper) {
+	this.identityMapper = identityMapper;
+    }
 }
