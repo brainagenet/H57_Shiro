@@ -20,6 +20,7 @@ We use maven to handle our dependencies.
 Installation
 ------------
 You will need an empty mysql database to actually run this code. By default, we expect:
+
 * url=jdbc:mysql://localhost/h57_shiro
 * username=h57_shiro
 * password=h57_shiro
@@ -29,11 +30,12 @@ However, you can change this in the [myBatis Development Properties file](https:
 Once your database is setup, you can run: mvn migration:bootstrap
 
 This will create and autopopulate all needed tables as per the [myBatis Bootstrap Script] (https://github.com/bubba-h57/H57_Shiro/blob/master/src/main/resources/migrations/scripts/bootstrap.sql)
+
 Coding and Pull Request Conventions
 -----------
 
 * We generally follow the Java coding standards.
-* No Spaces; use Tabs instead.
+* No Tabs; use 2 Spaces instead.
 * No trailing whitespaces.
 * No CRLF line endings, LF only, put your gits 'core.autocrlf' on 'true'.
 * No 80 column limit or 'weird' midstatement newlines.
