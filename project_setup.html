@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="H57 shiro : A Spring MVC 3.1.0 sample, leveraging Shiro 1.20, myBatis 3.0.6, and JSR-303 Validation (Hibernate reference implementation)." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>H57 shiro</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/bubba-h57/H57_Shiro">Fork Me on GitHub</a>
+
+          <h1 id="project_title">H57 shiro Setup</h1>
+          <h2 id="project_tagline">Spring MVC + Shiro + myBatis + JSR-303 Validation</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/bubba-h57/H57_Shiro/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/bubba-h57/H57_Shiro/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>Project Setup</h3>
+
+<p>This will walk you through the initial setup of the Sample application.</p>
+
+<h2>Assumptions</h2>
+
+<p>You need to have a basic familiarity with Eclipse/Spring STS and a passing understanding of Java.</p>
+
+<h2>Prerequisites</h2>
+
+<ol>
+<li>
+<a href="http://www.springsource.com/developer/sts">SpringSource Tool Suite</a> - We are using version 2.9.1.RELEASE</li>
+<li><a href="http://www.eclipse.org/egit/">Eclipse JGit Plugin</a></li>
+<li>
+<a href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html">JDK 1.6.0_30</a> or greater.</li>
+</ol><h2>Clone Repository</h2>
+
+<p>In STS, open the GIT Repository Explorer perspective.</p>
+
+<p><img src="https://camo.githubapp.com/2d9482fbcfd5042fe46bbd81982cb707f6017412/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f436c6f6e655f5265706f7369746f72792f4f70656e50657273706563746976652e706e67" alt="Open Perspective"></p>
+
+<p>Clone a GIT Repository and add the clone to this view.</p>
+
+<p><img src="https://camo.githubapp.com/2ecad674b9942f174c87c4df0fd1e2cba40ef15d/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f436c6f6e655f5265706f7369746f72792f436c6f6e6549636f6e2e706e67" alt="Open Perspective"></p>
+
+<p>Use the git@github.com:bubba-h57/H57_Shiro.git URL.
+Accept the defaults and you should have the Repo setup in STS.</p>
+
+<p><img src="https://camo.githubapp.com/24cedd60e5117a54d8685bf7374b0c4a00cabc2b/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f436c6f6e655f5265706f7369746f72792f436c6f6e654f6e652e706e67" alt="Open Perspective"></p>
+
+<p><img src="https://camo.githubapp.com/1e08d0364a56bb033d4abb7e43538f55f24b2b00/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f436c6f6e655f5265706f7369746f72792f436c6f6e6554776f2e706e67" alt="Open Perspective"></p>
+
+<p><img src="https://camo.githubapp.com/64311d478dd8b2fcfcaae39520e0ec3f5686a10f/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f436c6f6e655f5265706f7369746f72792f436c6f6e6554687265652e706e67" alt="Open Perspective"></p>
+
+<h2>Setup Project</h2>
+
+<p>Right Click on the Repo in the Git Repositories view and select Import Projects.</p>
+
+<p><img src="https://camo.githubapp.com/0c8b529ad7bfb661d7f551ba8c972f0422646198/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f53657475705f50726f6a6563742f496d706f727450726f6a656374732e706e67" alt="Open Perspective"></p>
+
+<p>Use the New Project wizard (there seem to be issues with just importing Maven Projects)</p>
+
+<p><img src="https://camo.githubapp.com/46d2ddb6ac2bc911ee79449e7d27cdc684da8c61/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f53657475705f50726f6a6563742f4e657750726f6a65637457697a6172642e706e67" alt="Open Perspective"></p>
+
+<p>Select a base project, and DO NOT use the default location, rather browse to the GIT location on your file system for me that is <em>C:\Users\Bubba\git\H57_Shiro</em></p>
+
+<p><img src="https://camo.githubapp.com/093224f4e36abcbd921035a08c10f128f0a63d5b/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f53657475705f50726f6a6563742f50726f6a6563744f6e652e706e67" alt="Open Perspective"></p>
+
+<p><img src="https://camo.githubapp.com/c9c028dc796e78dc8cba16d4f8151dd04f3d731e/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f53657475705f50726f6a6563742f50726f6a65637454776f2e706e67" alt="Open Perspective"></p>
+
+<ul>
+<li>Switch to the Spring Perspective.</li>
+<li>Right Click your newly created H57_Shiro project, go to the Maven submenu, and update project configuration. This will result in your project picking up the Maven and Spring project natures.</li>
+</ul><p><img src="https://camo.githubapp.com/e4eb8f5e396121e9624e6b8caa22b2ce03ab4059/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f53657475705f50726f6a6563742f50726f6a65637454687265652e706e67" alt="Open Perspective"></p>
+
+<p><img src="https://camo.githubapp.com/5463f5627598f8ae5e11796019bdd73ebfde6202/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f53657475705f50726f6a6563742f50726f6a656374466f75722e706e67" alt="Open Perspective"></p>
+
+<p>Project-&gt;Clean should net you a compilation.</p>
+
+<p><img src="https://camo.githubapp.com/c3e24e229e2f541d32b77314472adabd462d42c1/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f53657475705f50726f6a6563742f50726f6a656374466976652e706e67" alt="Open Perspective"></p>
+
+<h2>Setup Database</h2>
+
+<p>You will need a MySQL database, the default settings are:</p>
+
+<ul>
+<li>url=jdbc:mysql://localhost/h57_shiro</li>
+<li>username=h57_shiro</li>
+<li>password=h57_shiro</li>
+</ul><p>So create an empty h57_shiro database, create an h57_shiro user with a password the same as the username, and grant the h57_shiro user ownership of the h57_shiro database.</p>
+
+<p>You can, of course, modify this to whatever you like just update the <a href="https://github.com/bubba-h57/H57_Shiro/blob/master/src/main/resources/application.properties">application.properties</a> appropriately.</p>
+
+<h2>Bootstrap Database</h2>
+
+<p>We have the myBatis migration plugin setup to handle this for us, but it takes a bit of configuration. The easiest thing to do is open a console and browse to your ${project_root} directory, which also happens to be the git clone directory, and run:</p>
+
+<p><em>mvn migration:bootstrap</em></p>
+
+<p>You can also do this from STS by opening the run configurations dialog and creating a new Maven Build configuration. I used the following values:</p>
+
+<ul>
+<li>
+<em>Name:</em> MyBatis Bootstrap</li>
+<li>
+<em>Base directory:</em> ${project_loc}</li>
+<li>
+<em>Goals:</em> migration:bootstrap</li>
+</ul><p>Apply and then run that should get you the same as the command line.</p>
+
+<p><img src="https://camo.githubapp.com/f1bb0c49f6e3055f40460f051d5999d6bde752b2/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4d7962617469734d6176656e2f52756e436f6e6669672e706e67" alt="Open Perspective"></p>
+
+<p><img src="https://camo.githubapp.com/8c1b18ccd1e897155cdbfec4171ea9f1e630ca45/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4d7962617469734d6176656e2f4d794261746973426f6f7473747261702e706e67" alt="Open Perspective"></p>
+
+<h2>Deploy the Application</h2>
+
+<p>With the default STS setup, you should have a Servers view just beneath your Package/Project Explorer view(s). Right click the VMWare vFabric tc Server Developer Edition and ensure it starts up.</p>
+
+<p><img src="https://camo.githubapp.com/7a860b5128a74b636da42b5b5d2288feb8cd9d68/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4465706c6f792f53746172742e706e67" alt="Open Perspective"></p>
+
+<p>Once you have it started, just drag and drop your project (H57_Shiro) from the Package/Project Explorer view onto the vFabric server in the Servers view.</p>
+
+<p><img src="https://camo.githubapp.com/b69dd8da510674a055259197976a6454ad0da134/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4465706c6f792f447261672e706e67" alt="Open Perspective"></p>
+
+<p>Give it time to deploy and start, watch the console to see that there are no errors. If there are no errors (and there shouldn't be!) you are good to go.</p>
+
+<p><img src="https://camo.githubapp.com/2634a22caa26dc54a06fe47a5f8b8ceaa7be568c/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4465706c6f792f537461727465642e706e67" alt="Open Perspective"></p>
+
+<h2>Test the Application</h2>
+
+<p>In the Servers view, right click on the deployed (under the server) project and select "Open Home Page", You should see and big <em>Welcome to the H57 Shiro Sample!</em> page telling you that you are a guest. Check your URL in the browser, mine is <em>http://localhost:8080/H57_Shiro/</em></p>
+
+<p><img src="https://camo.githubapp.com/26ca3d3c3bef003be7259c74d0c69a8f72a7c916/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4465706c6f792f4f70656e486f6d65506167652e706e67" alt="Open Perspective"></p>
+
+<p><img src="https://camo.githubapp.com/ef15899313a827353a5a0d91510729879d123320/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4465706c6f792f4f70656e2e706e67" alt="Open Perspective"></p>
+
+<p><em>Smoketest</em>
+When we bootstrapped the database, we created a TestUser and a TestRole to verify everything is working with. Just type <em>smoketest</em> at the end of your url and enter to go to that page, again, for me this is <em>http://localhost:8080/H57_Shiro/smoketest</em></p>
+
+<p>This should need you a message stating that <em>You are Authenticated!</em> and verifying membership in the Test Role.</p>
+
+<p><img src="https://camo.githubapp.com/437cde88e9433ecc7626737f3fa1bbf689c205b5/687474703a2f2f626c6f672e68696e657335372e636f6d2f7475746f7269616c732f4835375f736869726f2f4465706c6f792f536d6f6b65546573742e706e67" alt="Open Perspective"></p>
+
+<h2>Conclusion</h2>
+
+<p>Everything works! Profit!</p>
+
+
+
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">H57 shiro maintained by <a href="https://github.com/bubba-h57">bubba-h57</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
